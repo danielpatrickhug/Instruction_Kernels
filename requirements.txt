@@ -1,0 +1,6 @@
+pandas
+sentence-transformers
+bertopic
+scipy
+torch
+numpy
