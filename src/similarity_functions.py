@@ -195,3 +195,40 @@ def k_hop_message_passing_sparse(A, node_features, k):
         A_k += A_k.dot(A)
 
     return A_k.toarray(), agg_features.toarray()
+
+def prune_ref_docs(qa_embs, ref_embs, ref_docs, threshold=0.1):
+    """
+    Drops unnecessary documents from the reference embeddings and updates the list of reference documents,
+    and then recomputes the adjacency matrix.
+
+    Parameters:
+    qa_embs (numpy array): The embedding matrix of QA pairs.
+    ref_embs (numpy array): The embedding matrix of reference sentences.
+    ref_docs (list): The list of reference documents.
+    threshold (float): The threshold below which documents are considered unnecessary.
+
+    Returns:
+    pruned_ref_embs (numpy array): The pruned embedding matrix of reference sentences.
+    pruned_ref_docs (list): The pruned list of reference documents.
+    pruned_A (numpy array): The pruned adjacency matrix.
+    """
+
+    # Compute the initial adjacency matrix with full reference embeddings
+    A = gaussian_kernel_torch(qa_embs, ref_embs, sigma=0.5)
+    print(f'Before: {A.shape}')
+    # Compute the row-wise sum of the adjacency matrix
+    row_sum = torch.sum(A, dim=0)
+
+    # Identify the indexes of the relevant documents
+    relevant_idx = torch.where(row_sum > threshold * row_sum.max())[0]
+
+    # Drop unnecessary rows from the reference embeddings
+    pruned_ref_embs = ref_embs[relevant_idx]
+
+    # Update the list of reference documents
+    pruned_ref_docs = [ref_docs[i] for i in relevant_idx]
+
+    # Recompute the adjacency matrix with pruned reference embeddings
+    pruned_A = gaussian_kernel_torch(qa_embs, pruned_ref_embs, sigma=0.5)
+    print(f'After: {pruned_A.shape}')
+    return pruned_ref_embs, pruned_ref_docs, pruned_A
