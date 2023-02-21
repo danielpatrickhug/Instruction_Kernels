@@ -4,3 +4,4 @@ bertopic
 scipy
 torch
 numpy
+datasets
