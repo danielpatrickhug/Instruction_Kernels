@@ -6,7 +6,7 @@ TODO:
 Use max instead of sum for gnn
 
 ## Main Idea:
-Kernels and message passing and feature aggregation
+Kernels, message passing and feature aggregation
 ```
 Message passing and feature aggregation are effective techniques for improving the quality of topic clusters in a graph-based topic modeling system. 
 Message passing involves propagating information through the edges of a graph using matrix exponentials, which allows information to be shared between 
