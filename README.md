@@ -1,4 +1,4 @@
-# Sentence_Kernels
+# Instruction Kernels
 
 - This is a repo of some of the work I've done while working on Open Assistant. mainly for topic modeling.
 
