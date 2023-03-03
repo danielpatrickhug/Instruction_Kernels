@@ -12,7 +12,7 @@ Message passing and feature aggregation are effective techniques for improving t
 Message passing involves propagating information through the edges of a graph using matrix exponentials, which allows information to be shared between 
 nodes and helps to capture the relationships between them. This allows for more accurate modeling of topic clusters and helps to identify hidden themes 
 that may not be apparent in the raw data. Feature aggregation involves summarizing the information contained in the neighboring nodes and using this 
-summary to update the features of the current node. This helps to capture the shared characteristics of the neighboring nodes and leads to better 
+summary to update the features of the current node. The information passing in the local neighborhood is `multiplicative`, the node "communicate" with each other. This helps to capture the shared characteristics of the neighboring nodes and leads to better 
 representation of the topics in the graph. By combining these two techniques, the topic model is able to identify more coherent and meaningful topic 
 clusters, and produces results that are more informative and useful for downstream analysis.
 ```
