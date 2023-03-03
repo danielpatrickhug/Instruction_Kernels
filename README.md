@@ -2,6 +2,9 @@
 
 - This is a repo of some of the work I've done while working on Open Assistant. mainly for topic modeling.
 
+TODO:
+Use max instead of sum for gnn
+
 ## Main Idea:
 Kernels and message passing and feature aggregation
 ```
